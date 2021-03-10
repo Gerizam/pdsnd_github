@@ -19,14 +19,16 @@ def get_filters():
     
     
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    while True:
-      city = input("\nWhich city would you like to filter by? New York City, Chicago or Washington?\n").lower()
-      if city not in ('new york city', 'chicago', 'washington'):
-        print("You entered an invalid city. Please try again: ")
-        continue
-      else:
-        print("You entered the city {}.".format(city.title()))
-        break
+    
+    print("Which city would you like to filter by? New York City, Chicago or Washington?")
+
+    city = input()
+    city_name = city.lower().replace(' ','_')
+    
+    while city_name not in CITY_DATA:
+        
+        print("Your entered city %s is invalid " % (city_name))
+    print("Selected City is %s " % (city_name))
 
     # get user input for month (all, january, february, ... , june)
     while True:
