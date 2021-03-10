@@ -6,6 +6,11 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+""" 
+Defining dictionary key as city names and values as respective csv file's to
+access them according to the user input 
+"""
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -65,15 +70,23 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df = pd.read_csv(CITY_DATA[city])
+    # To load the selected city csv file
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
+    # To convert start time into standard time
     df['month'] = df['Start Time'].dt.month
+    # To get the month value from start time
     df['day_of_week'] = df['Start Time'].dt.weekday_name
+    # To get the day_of_week value from start time
+
     if month != 'all':
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
         df = df[df['month'] == month]
+    # New DataFrame which contains the old data frame month equals to selected month
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
+    # New DataFrame which contains the old data frame day equals to selected day
     return df
     print(df)
 
